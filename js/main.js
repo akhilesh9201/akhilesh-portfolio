@@ -48,6 +48,35 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 /* ============================================================
+   MOBILE NAV — HAMBURGER TOGGLE
+============================================================ */
+const hamburger  = document.getElementById('nav-hamburger');
+const navLinks   = document.getElementById('nav-links');
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close menu when any nav link is tapped
+  navLinks.querySelectorAll('.nav__link').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close menu on outside tap
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+/* ============================================================
    IMAGE PLACEHOLDER FALLBACK
    onerror is set inline in HTML; this handles cases where the
    image src is empty string (no src set at all).
