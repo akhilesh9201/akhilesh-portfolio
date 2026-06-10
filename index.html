@@ -6,6 +6,15 @@
   <meta name="description" content="Akhilesh Joglekar — UX Designer II at Walmart, crafting intuitive human-centred product experiences." />
   <title>Akhilesh Joglekar — UX Designer</title>
 
+  <!-- Theme init — runs before CSS loads to prevent flash of wrong theme -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', saved || preferred);
+    })();
+  </script>
+
   <!-- Google Fonts: Cormorant Garamond (display serif) + DM Sans (body sans-serif) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,6 +58,28 @@
         <li><a href="images/Akhilesh_Joglekar_Resume.docx" class="nav__link" download target="_blank">Resume</a></li>
       </ul>
       <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+      >
+        <!-- Moon: shown in light mode -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+        <!-- Sun: shown in dark mode -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+      <button
         class="nav__hamburger"
         id="nav-hamburger"
         aria-label="Toggle navigation menu"
@@ -79,7 +110,7 @@
             human-centred product&nbsp;experiences.
           </h1>
           <p class="hero__subtext reveal-item">
-            Currently a UX Designer II at Walmart, working across enterprise, B2B, and GenAI products. I turn complex problems into clear, usable design.
+            Currently, a UX Designer at Walmart worked across Enterprise applications, B2B, B2C and GenAI products. I like turning complex problems into viable, usable solutions.
           </p>
           <div class="hero__ctas reveal-item" role="group" aria-label="Primary actions">
             <a href="#contact" class="btn btn--primary">Get in touch</a>
@@ -267,10 +298,13 @@
         </div>
         <div class="about__text-col">
           <p class="about__body reveal-item">
-            I'm a UX Designer II at Walmart, where I work at the intersection of enterprise software, B2B systems, and emerging GenAI products. My practice is grounded in research, systems thinking, and a deep respect for the humans on the other side of every screen.
+            I'm a UX Designer with 3 years of experience across B2B, B2C, associate, and enterprise products, mostly at Walmart scale. I gravitate toward hard workflow problems: the kind where multiple teams are involved, nothing quite talks to each other, and the user ends up stuck in the middle.
           </p>
           <p class="about__body reveal-item">
-            Before Walmart, I built experience across domains that sharpened my ability to make complexity feel simple — whether that's a returns flow for a global retailer or a data-dense enterprise dashboard.
+            I've worked across a pretty wide range: consumer-facing journeys, procurement and negotiation tools, mobile workflows for frontline associates, and large enterprise systems that sourcing teams live in every day. The common thread is making complex systems feel less painful for the people inside them.
+          </p>
+          <p class="about__body reveal-item">
+            I've also been using AI to move faster and think sharper in my own process. Where I'm headed is designing AI products that feel genuinely useful to everyday people, not just impressive in a demo.
           </p>
         </div>
       </div>

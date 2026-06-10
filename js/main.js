@@ -48,6 +48,20 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 /* ============================================================
+   DARK / LIGHT MODE TOGGLE
+============================================================ */
+const themeToggle = document.getElementById('theme-toggle');
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next    = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+}
+
+/* ============================================================
    MOBILE NAV — HAMBURGER TOGGLE
 ============================================================ */
 const hamburger  = document.getElementById('nav-hamburger');

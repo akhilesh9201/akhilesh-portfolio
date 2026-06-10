@@ -48,10 +48,44 @@
   --dur-base:        200ms;
   --dur-slow:        400ms;
 
+  /* Shadows */
+  --shadow-card:       0px 4px 16px rgba(0, 0, 0, 0.08), 0px 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 4px 12px rgba(0, 0, 0, 0.07);
+
   /* Layout */
   --max-width:       1200px;
   --nav-height:      72px;
   --page-px:         clamp(var(--space-6), 6vw, var(--space-16));
+}
+
+/* ============================================================
+   DARK MODE TOKENS
+============================================================ */
+:root[data-theme="dark"] {
+  --clr-bg:          #0f0f0f;
+  --clr-surface:     #1a1a1a;
+  --clr-ink:         #f0f0f0;
+  --clr-ink-muted:   #a0a0a0;
+  --clr-ink-faint:   #555555;
+  --clr-accent:      #d4784a;
+  --clr-border:      #2a2a2a;
+  --shadow-card:       0px 4px 16px rgba(0, 0, 0, 0.35), 0px 1px 4px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0px 12px 32px rgba(0, 0, 0, 0.45), 0px 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Respect system preference when no saved preference exists */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --clr-bg:          #0f0f0f;
+    --clr-surface:     #1a1a1a;
+    --clr-ink:         #f0f0f0;
+    --clr-ink-muted:   #a0a0a0;
+    --clr-ink-faint:   #555555;
+    --clr-accent:      #d4784a;
+    --clr-border:      #2a2a2a;
+    --shadow-card:       0px 4px 16px rgba(0, 0, 0, 0.35), 0px 1px 4px rgba(0, 0, 0, 0.25);
+    --shadow-card-hover: 0px 12px 32px rgba(0, 0, 0, 0.45), 0px 4px 12px rgba(0, 0, 0, 0.35);
+  }
 }
 
 /* ============================================================
@@ -298,37 +332,16 @@ a {
 }
 
 .btn--ghost {
-  background-color: transparent;
-  color: var(--clr-ink);
-  border: 1px solid var(--clr-border);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn--ghost::before {
-  content: '';
-  position: absolute;
-  inset: 0;
   background-color: var(--clr-ink);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-base) var(--ease-out);
-  z-index: 0;
+  color: var(--clr-bg);
+  border: 1px solid var(--clr-ink);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
 .btn--ghost:hover {
-  color: var(--clr-bg);
+  background-color: transparent;
+  color: var(--clr-ink);
   border-color: var(--clr-ink);
-}
-
-.btn--ghost:hover::before {
-  transform: scaleX(1);
-}
-
-.btn--ghost span,
-.btn--ghost {
-  position: relative;
-  z-index: 1;
 }
 
 /* ============================================================
@@ -462,13 +475,14 @@ a {
   max-width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08), 0px 1px 4px rgba(0, 0, 0, 0.04);
+  background-color: var(--clr-surface);
+  box-shadow: var(--shadow-card);
   transition: box-shadow 200ms ease, transform 200ms ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 4px 12px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .project-card__link {
@@ -730,6 +744,43 @@ a {
 .nav__hamburger[aria-expanded="true"] .nav__hamburger-bar:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+============================================================ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-ink-muted);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: color var(--dur-base) var(--ease-standard),
+              background-color var(--dur-base) var(--ease-standard);
+}
+
+.theme-toggle:hover {
+  color: var(--clr-ink);
+  background-color: var(--clr-border);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+/* Show only the relevant icon */
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* ============================================================
    RESPONSIVE — TABLET  (768px – 1023px)
