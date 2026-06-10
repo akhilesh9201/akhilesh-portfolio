@@ -52,12 +52,21 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 ============================================================ */
 const themeToggle = document.getElementById('theme-toggle');
 
+function syncToggle() {
+  if (!themeToggle) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  themeToggle.setAttribute('aria-checked', String(isDark));
+}
+
 if (themeToggle) {
+  syncToggle(); // sync on load
+
   themeToggle.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     const next    = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+    syncToggle();
   });
 }
 
